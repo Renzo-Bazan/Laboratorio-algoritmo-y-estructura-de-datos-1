@@ -14,9 +14,7 @@ ruta_base = Path.home()
 # "practicas_path.py"
 # Almacena el directorio obtenido en la variable ruta. No olvides importar Path
 
-from pathlib import Path
-
-ruta = Path(C:) / "Curso Python" / "Día 6" / "practicas_path.py"
+ruta = Path("Curso Python") / "Día 6" / "practicas_path.py"
 
 
 # Práctica Path 3
@@ -26,7 +24,8 @@ ruta = Path(C:) / "Curso Python" / "Día 6" / "practicas_path.py"
 # Almacena el directorio obtenido en la variable ruta. No olvides importar Path, y de concatenar el objeto Path que refiere a la carpeta base del usuario
 
 
-
+ruta = Path.home() / "Curso Python" / "Día 6" / "practicas_path.py"
+print(ruta)
 
 
 # from os import system
@@ -45,22 +44,28 @@ ruta = Path(C:) / "Curso Python" / "Día 6" / "practicas_path.py"
 # Crea una función llamada abrir_leer() que abra (open) un archivo indicado como parámetro, 
 # y devuelva su contenido (read).
 
-def abrir_leer(ruta_archivo):
-    try:
-        with open(ruta_archivo, 'r') as archivo:
-            contenido = archivo.read()
-        return contenido
-    except FileNotFoundError:
-        return "El archivo no se encuentra en la ruta especificada."
-    except Exception as e:
-        return f"Ocurrió un error: {e}"
+def abrir_leer(archivo_abrir):
+    archivo = open(archivo_abrir,"r")
+    contenido = archivo.read()
+    archivo.close()
+    return contenido
 
 
 # Práctica Archivos y Funciones 2
 # Crea una función llamada sobrescribir() que abra (open) un archivo indicado como parámetro, 
 # y sobrescriba cualquier contenido anterior por el texto "contenido eliminado"
 
+def sobrescribir(archivo_sobrescribir):
+    archivo = open(archivo_sobrescribir, "w")
+    archivo.write("contenido eliminado")
+    archivo.close()
+
 
 # Práctica Archivos y Funciones 3
 # Crea una función llamada registro_error() que abra (open) un archivo indicado como parámetro, y 
 # lo actualice añadiendo una línea al final que indique "se ha registrado un error de ejecución".
+
+def registro_error(archivo1):
+    archivo = open(archivo1,"a")
+    archivo.write("\nSe ha registrado un error de ejecución\n")
+    archivo.close()
