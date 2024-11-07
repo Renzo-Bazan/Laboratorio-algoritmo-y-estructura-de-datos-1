@@ -186,7 +186,7 @@ class Alarma:
     def postergar(self,cantidad_minutos):
         print(f"La alarma ha sido pospuesta {cantidad_minutos} minutos")
 
-mi_alarma = Alarma
+mi_alarma = Alarma()
 mi_alarma.postergar(10)
 
 # class Pajaro():
@@ -498,19 +498,19 @@ class Mamifero(Vertebrado):
     def amamantar(self):
         print("Amamantando crías")
 
-class Ornitorrinco(Vertebrado,Ave,Reptil,Pez,Mamifero):
-    def caracteristicas_aves(self):
-        Ave.tiene_pico(self)
-        Ave.poner_huevos(self)
+class Ornitorrinco(Ave, Reptil, Pez, Mamifero):
+    pass
 
-    def huesos(self):
-        Vertebrado(self)
-    
-    def veneno(self):
-        Reptil.venenoso(self)
-    
-    def nadar(self):
-        Pez.nadar(self)
+ornitorrinco = Ornitorrinco()
+
+
+print(ornitorrinco.vertebrado)
+print(ornitorrinco.tiene_pico)
+print(ornitorrinco.venenoso)
+ornitorrinco.poner_huevos()
+ornitorrinco.nadar()
+ornitorrinco.caminar()
+ornitorrinco.amamantar()
         
 
 
@@ -523,23 +523,23 @@ class Ornitorrinco(Vertebrado,Ave,Reptil,Pez,Mamifero):
 # [1]: asegúrate de utilizar return seguido de una cadena de texto
 
 
-# class Padre():
-    # color_ojos = "marrón"
-    # tipo_pelo = "rulos"
-    # altura = "media"
-    # voz = "grave"
-    # deporte_preferido = "tenis"
-    # def reir(self):
-        # return "Jajaja"
-    # def hobby(self):
-        # return "Pinto madera en mi tiempo libre"
-    # def caminar(self):
-        # return "Caminando con pasos largos y rápidos"
+class Padre():
+    color_ojos = "marrón"
+    tipo_pelo = "rulos"
+    altura = "media"
+    voz = "grave"
+    deporte_preferido = "tenis"
+    def reir(self):
+        return "Jajaja"
+    def hobby(self):
+        return "Pinto madera en mi tiempo libre"
+    def caminar(self):
+        return "Caminando con pasos largos y rápidos"
 
-# class Hijo(COMPLETAR):
-#     COMPLETAR
+class Hijo(Padre):
+     def hobby(self):
+         return "Juego videojuegos en mi tiempo libre"
 
-#     "Juego videojuegos en mi tiempo libre"
 
 
 
@@ -593,9 +593,15 @@ class Ornitorrinco(Vertebrado,Ave,Reptil,Pez,Mamifero):
 # Puedes recordar cómo implementar la función len() siguiente enlace: https://docs.aws.amazon.com/es_es/redshift/latest/dg/r_LEN.html
 
 
-# palabra = "polimorfismo"
-# lista = ["Clases", "POO", "Polimorfismo"]
-# tupla = (1, 2, 3, 80)
+palabra = "polimorfismo"
+lista = ["Clases", "POO", "Polimorfismo"]
+tupla = (1, 2, 3, 80)
+
+
+objetos = [palabra, lista, tupla]
+
+for objeto in objetos:
+    print(f"La longitud de {objeto} es: {len(objeto)}")
 
 
 # Práctica Polimorfismo 2
@@ -604,17 +610,26 @@ class Ornitorrinco(Vertebrado,Ave,Reptil,Pez,Mamifero):
 # Crea un iterador que logre un ataque conjugado en el siguiente orden: Arquero, Mago, Samurai, llamando al método atacar() de cada uno de los personajes. Deberás crear instancias de cada una de las clases anteriores para construir un iterable (una lista llamada personajes) que pueda recorrese en dicho orden.
 
 
-# class Mago():
-    # def atacar(self):
-        # print("Ataque mágico")
+class Mago():
+    def atacar(self):
+        print("Ataque mágico")
 
-# class Arquero():
-    # def atacar(self):
-        # print("Lanzamiento de flecha")
+class Arquero():
+    def atacar(self):
+        print("Lanzamiento de flecha")
 
-# class Samurai():
-    # def atacar(self):
-        # print("Ataque con katana")
+class Samurai():
+    def atacar(self):
+        print("Ataque con katana")
+
+
+arquero = Arquero()
+mago = Mago()
+samurai = Samurai()
+personajes = [arquero, mago, samurai]
+
+for personaje in personajes:
+    personaje.atacar()
 
 
 # Práctica Polimorfismo 3
@@ -623,18 +638,28 @@ class Ornitorrinco(Vertebrado,Ave,Reptil,Pez,Mamifero):
 # Crea una función llamada personaje_defender(), que pueda recibir un objeto (una instancia de las clases de tus personajes), y ejecutar su método defender() independientemente de qué tipo de personaje se trate.
 
 
-# class Mago():
-    # def defender(self):
-        # print("Escudo mágico")
+class Mago():
+    def defender(self):
+        print("Escudo mágico")
 
-# class Arquero():
-    # def defender(self):
-        # print("Esconderse")
+class Arquero():
+    def defender(self):
+        print("Esconderse")
 
-# class Samurai():
-    # def defender(self):
-        # print("Bloqueo")
+class Samurai():
+    def defender(self):
+        print("Bloqueo")
 
+def personaje_defender(personaje):
+    personaje.defender()
+
+mago = Mago()
+arquero = Arquero()
+samurai = Samurai()
+
+personaje_defender(mago)
+personaje_defender(arquero)
+personaje_defender(samurai)
 
 #--------------------------------------------------------------------------------------------------
 
@@ -663,13 +688,18 @@ class Ornitorrinco(Vertebrado,Ave,Reptil,Pez,Mamifero):
 # Práctica Métodos Especiales 1
 # Dada la clase Libro, implementa el método especial __str__ para que cada vez que se imprima el objeto, devuelva '"{titulo}", de {autor}' (atención: el título debe estar encerrado entre comillas dobles).
 
-# class Libro():
-    # def __init__(self, titulo, autor, cantidad_paginas):
-        # self.titulo = titulo
-        # self.autor = autor
-        # self.cantidad_paginas = cantidad_paginas
+class Libro():
+    def __init__(self, titulo, autor, cantidad_paginas):
+        self.titulo = titulo
+        self.autor = autor
+        self.cantidad_paginas = cantidad_paginas
 
-    # def COMPLETAR
+    def __str__(self):
+        return f'"{self.titulo}", de {self.autor}'
+
+mi_libro = Libro("Cien años de soledad", "Gabriel García Márquez", 417)
+print(mi_libro)
+
 
 
 
@@ -677,24 +707,33 @@ class Ornitorrinco(Vertebrado,Ave,Reptil,Pez,Mamifero):
 # Dada la clase Libro, implementa el método especial __len__ para que cada vez que se ejecute la función len() sobre el mismo, devuelva el número de páginas como número entero
 
 
-# class Libro():
-    # def __init__(self, titulo, autor, cantidad_paginas):
-        # self.titulo = titulo
-        # self.autor = autor
-        # self.cantidad_paginas = cantidad_paginas
+class Libro():
+    def __init__(self, titulo, autor, cantidad_paginas):
+        self.titulo = titulo
+        self.autor = autor
+        self.cantidad_paginas = cantidad_paginas
 
-    # def COMPLETAR
+    def __len__(self):
+        return self.cantidad_paginas
 
+mi_libro = Libro("Cien años de soledad", "Gabriel García Márquez", 417)
+
+print(len(mi_libro))
 
 
 # Práctica Métodos Especiales 3
 # Dada la clase Libro, implementa el método especial __del__ para que el usuario sea informado con el mensaje "Libro eliminado", mostrándolo en pantalla cada vez que el libro se elimine.
 
 
-# class Libro():
-    # def __init__(self, titulo, autor, cantidad_paginas):
-        # self.titulo = titulo
-        # self.autor = autor
-        # self.cantidad_paginas = cantidad_paginas
+class Libro():
+    def __init__(self, titulo, autor, cantidad_paginas):
+        self.titulo = titulo
+        self.autor = autor
+        self.cantidad_paginas = cantidad_paginas
 
-    # def COMPLETAR
+    def __del__(self):
+        print("Libro eliminado")
+    
+mi_libro = Libro("1984", "George Orwell", 328)
+
+del mi_libro
